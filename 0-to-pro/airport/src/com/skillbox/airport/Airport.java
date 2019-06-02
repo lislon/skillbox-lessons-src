@@ -25,8 +25,14 @@ public class Airport
         List<Aircraft> aircraftList = new ArrayList<Aircraft>();
         for(Terminal terminal : terminals)
         {
-            aircraftList.addAll(terminal.getArrivalAircrafts());
-            aircraftList.addAll(terminal.getDepartureAircrafts());
+            for(Arrival arrival : terminal.getArrivalAircrafts())
+            {
+                aircraftList.add(arrival.getAircraft());
+            }
+            for(Departure departure : terminal.getDepartureAircrafts())
+            {
+                aircraftList.add(departure.getAircraft());
+            }
             aircraftList.addAll(terminal.getParkingAircrafts());
         }
         return aircraftList;

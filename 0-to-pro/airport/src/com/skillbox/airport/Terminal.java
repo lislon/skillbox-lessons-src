@@ -33,38 +33,57 @@ public class Terminal
         parkingAircrafts.add(aircraft);
     }
 
-    public Collection<Aircraft> getDepartureAircrafts()
+    public Collection<Departure> getDepartureAircrafts()
     {
-        return departureAircrafts.values();
-    }
-
-    public Collection<Aircraft> getDepartureAircrafts(Date from, Date to)
-    {
-        ArrayList<Aircraft> aircrafts = new ArrayList<>();
+        ArrayList<Departure> departures = new ArrayList<>();
         for(Date date : departureAircrafts.keySet())
         {
-            if(date.compareTo(from) >= 0 && date.compareTo(to) <= 0) {
-                aircrafts.add(departureAircrafts.get(date));
-            }
+            departures.add(new Departure(departureAircrafts.get(date), date));
         }
-        return aircrafts;
+        return departures;
     }
 
-    public Collection<Aircraft> getArrivalAircrafts()
+    public Collection<Departure> getDepartureAircrafts(Date from, Date to)
     {
-        return arrivalAircrafts.values();
+        ArrayList<Departure> departures = new ArrayList<>();
+
+        Set<Date> departureDates = departureAircrafts
+                .subMap(from, true,
+                        to, true)
+                .keySet();
+
+        for (Date date : departureDates)
+        {
+            departures.add(new Departure(departureAircrafts.get(date), date));
+        }
+
+        return departures;
     }
 
-    public Collection<Aircraft> getArrivalAircrafts(Date from, Date to)
+    public Collection<Arrival> getArrivalAircrafts()
     {
-        ArrayList<Aircraft> aircrafts = new ArrayList<>();
+        ArrayList<Arrival> arrivals = new ArrayList<>();
         for(Date date : arrivalAircrafts.keySet())
         {
-            if(date.compareTo(from) >= 0 && date.compareTo(to) <= 0) {
-                aircrafts.add(arrivalAircrafts.get(date));
-            }
+            arrivals.add(new Arrival(arrivalAircrafts.get(date), date));
         }
-        return aircrafts;
+        return arrivals;
+    }
+
+    public Collection<Arrival> getArrivalAircrafts(Date from, Date to)
+    {
+        ArrayList<Arrival> arrivals = new ArrayList<>();
+
+        Set<Date> arrivalDates = arrivalAircrafts
+                .subMap(from, true,
+                        to, true)
+                .keySet();
+
+        for (Date date : arrivalDates)
+        {
+            arrivals.add(new Arrival(arrivalAircrafts.get(date), date));
+        }
+        return arrivals;
     }
 
     public Collection<Aircraft> getParkingAircrafts()
