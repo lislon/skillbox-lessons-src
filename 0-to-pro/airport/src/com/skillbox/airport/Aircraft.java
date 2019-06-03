@@ -13,4 +13,9 @@ public class Aircraft
     {
         return model;
     }
+
+    @Override
+    public String toString() {
+        return model;
+    }
 }
