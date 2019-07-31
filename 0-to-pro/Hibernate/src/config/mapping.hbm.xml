@@ -25,8 +25,8 @@
 
     <class name="Employee" table="employee">
         <id name="id" column="id"><generator class="increment"/></id>
-        <property name="hireDate" type="date" column="hire_date"/>
-        <property name="salary" type="int" column="salary"/>
+        <property name="hireDate" column="hire_date"/>
+        <property name="salary" column="salary"/>
         <property name="name" not-null="true" type="string" />
         <many-to-one name="department" class="entities.Department" fetch="select">
             <column name="department_id" not-null="true" />
